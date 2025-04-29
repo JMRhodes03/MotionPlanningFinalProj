@@ -4,7 +4,7 @@
 // Authors: Jessica M Rhodes, Kruthika Gangaraju
 //////////////////////////////////////
 
-#include "RG-RRT.h"
+#include "RG-RRT-Rhodes.h"
 #include <ompl/util/Exception.h>
 #include <ompl/base/goals/GoalSampleableRegion.h>
 #include <ompl/tools/config/SelfConfig.h>
