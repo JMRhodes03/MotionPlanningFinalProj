@@ -6,7 +6,7 @@ CXX_DEFINES = -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_FILESYSTEM_D
 
 CXX_INCLUDES = -isystem /opt/homebrew/include/ompl-1.7 -isystem /opt/homebrew/include -isystem /opt/homebrew/include/eigen3
 
-CXX_FLAGSarm64 = -std=gnu++14 -arch arm64
+CXX_FLAGSarm64 = -g -std=gnu++17 -arch arm64
 
-CXX_FLAGS = -std=gnu++14 -arch arm64
+CXX_FLAGS = -g -std=gnu++17 -arch arm64
 
