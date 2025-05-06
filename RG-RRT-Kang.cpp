@@ -58,7 +58,6 @@ void ompl::control::RGRRT::setup(void)
         nn_ = std::make_shared<ompl::NearestNeighborsLinear<Motion *>>();
         nn_->setDistanceFunction([this](const Motion *a, const Motion *b) { return distanceFunction(a, b); });
     }
-    std::cout << "RGRRT::setup: Nearest neighbor data structure initialized." << std::endl;
 }
 
 void ompl::control::RGRRT::freeMemory()
@@ -127,6 +126,7 @@ void ompl::control::RGRRT::setupReachableSet(Motion* const m)
         Motion *motion = new Motion(siC_);
         siC_->copyControl(motion->control, m->control);
         double *controls = motion->control->as<RealVectorControlSpace::ControlType>()->values;
+        // controls[0] = low_bound[0] + control_offset_[0] * (i + 1);
         // for car
         for (int j = 0; j < low_bound.size(); j++)
         {
@@ -150,6 +150,25 @@ void ompl::control::RGRRT::setupReachableSet(Motion* const m)
 
 int ompl::control::RGRRT::selectReachableMotion(const Motion* qnear, const Motion* qrand)
 {
+    // const double near_distance = si_->distance(qnear->state, qrand->state);
+    // double min_distance = near_distance;
+    // const std::vector<Motion*>& reachable = qnear->reachable;
+
+    // // std::cout << "min_distance: " << min_distance << std::endl;
+    
+    // int min_index = -1;
+    // for (int i = 0; i < reachable.size(); i++)
+    // {
+    //     double distance = si_->distance(qnear->reachable[i]->state, qrand->state);
+    //     // std::cout << "distance: " << distance << std::endl;
+    //     if (distance < min_distance)
+    //     {
+    //         min_distance = distance;
+    //         min_index = i;
+    //     }
+    // }
+    // return min_index;
+
     const double near_distance = si_->distance(qnear->state, qrand->state);
     double min_distance = near_distance;
     const std::vector<Motion*>& reachable = qnear->reachable;
@@ -175,6 +194,7 @@ int ompl::control::RGRRT::selectReachableMotion(const Motion* qnear, const Motio
 
 ompl::base::PlannerStatus ompl::control::RGRRT::solve(const base::PlannerTerminationCondition &ptc)
 {
+
     if (!nn_)
     {
         std::cerr << "Error: Nearest neighbor data structure is not initialized." << std::endl;
@@ -184,9 +204,8 @@ ompl::base::PlannerStatus ompl::control::RGRRT::solve(const base::PlannerTermina
 
     checkValidity();
     base::Goal *goal = pdef_->getGoal().get();
-    auto *goal_s = dynamic_cast<base::GoalSampleableRegion*>(goal);
-    goal->print(std::cout);
-
+    auto *goal_s = dynamic_cast<base::GoalSampleableRegion *>(goal);
+ 
     while (const base::State *st = pis_.nextStart())
     {
         auto *motion = new Motion(siC_);
@@ -199,8 +218,9 @@ ompl::base::PlannerStatus ompl::control::RGRRT::solve(const base::PlannerTermina
             return base::PlannerStatus::INVALID_START;
         }
         nn_->add(motion);
-    }
 
+    }
+ 
     if (nn_->size() == 0)
     {
         OMPL_ERROR("%s: There are no valid initial states!", getName().c_str());

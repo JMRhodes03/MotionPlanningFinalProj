@@ -106,7 +106,7 @@ namespace ompl
     
                 Motion *lastGoalMotion_{nullptr};
 
-                const int RSIZE = 10;
+                const int RSIZE = 20;
                 
                 std::vector<double> control_offset_;
         };
