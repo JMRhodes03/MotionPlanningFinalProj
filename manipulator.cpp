@@ -27,7 +27,7 @@
 
 
 // Your implementation of RG-RRT
-#include "RG-RRT-Kang.h"
+#include "RG-RRT-Rhodes.h"
 
 // Define global variables
 int n = 0;
