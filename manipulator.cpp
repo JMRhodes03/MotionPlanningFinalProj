@@ -14,6 +14,7 @@
 
 #include <ompl/base/ProjectionEvaluator.h>
 #include <ompl/control/SpaceInformation.h>
+#include <ompl/base/goals/GoalRegion.h>
 
 #include <ompl/control/SimpleSetup.h>
 #include <ompl/control/ODESolver.h>
@@ -24,6 +25,7 @@
 #include <ompl/control/planners/kpiece/KPIECE1.h>
 #include <ompl/base/goals/GoalStates.h>
 #include <ompl/tools/benchmark/Benchmark.h>
+#include <ompl/base/PlannerData.h>
 
 
 // Your implementation of RG-RRT
@@ -31,10 +33,46 @@
 
 // Define global variables
 int n = 0;
-double joint_vel_limit = 0.0;
-double torque_limit;
+double* joint_vel_limit = nullptr;
+double* torque_limit = nullptr;
 double* link_lengths = nullptr;
 double* masses = nullptr;
+
+class ManipulatorGoalRegion : public ompl::base::GoalRegion
+{
+public:
+    ManipulatorGoalRegion(const ompl::base::SpaceInformationPtr &si, const std::vector<double> &goal_center, double goal_radius)
+        : ompl::base::GoalRegion(si), goal_center_(goal_center), goal_radius_(goal_radius)
+    {
+        setThreshold(goal_radius); // Set the goal threshold (radius)
+    }
+
+    // Override the distanceGoal method
+    double distanceGoal(const ompl::base::State *state) const override
+    {
+        const auto *cstate = state->as<ompl::base::CompoundState>();
+        std::vector<double> joint_angles(n);
+
+        // Extract joint angles from the state
+        for (int i = 0; i < n; ++i)
+        {
+            const ompl::base::SO2StateSpace::StateType *joint_angle = cstate->as<ompl::base::SO2StateSpace::StateType>(i);
+            joint_angles[i] = joint_angle->value;
+        }
+
+        // Compute the Euclidean distance to the goal center
+        double distance = 0.0;
+        for (int i = 0; i < n; ++i)
+        {
+            distance += std::pow(joint_angles[i] - goal_center_[i], 2);
+        }
+        return std::sqrt(distance);
+    }
+
+private:
+    std::vector<double> goal_center_; // Center of the goal region
+    double goal_radius_;              // Radius of the goal region
+};
 
 // Your projection for the Manipulator
 class ManipulatorProjection : public ompl::base::ProjectionEvaluator
@@ -47,13 +85,21 @@ public:
     unsigned int getDimension() const override
     {
         // TODO: The dimension of your projection for the Manipulator
-        return 2;
+        return 2*n;
     }
 
     void project(const ompl::base::State *state, Eigen::Ref<Eigen::VectorXd> projection) const override
     {
         // TODO: Your projection for the Manipulator
-        // const auto *cstate = state->as<ompl::base::CompoundState>();
+        const auto *cstate = state->as<ompl::base::CompoundState>();
+        for (int i = 0; i < n; ++i)
+        {
+            const ompl::base::SO2StateSpace::StateType *joint_angle = cstate->as<ompl::base::SO2StateSpace::StateType>(i);
+            const ompl::base::RealVectorStateSpace::StateType *joint_velocity = cstate->as<ompl::base::RealVectorStateSpace::StateType>(n);
+            
+            projection(i) = joint_angle->value / M_PI;
+            projection(i + n) = joint_velocity->values[i] / joint_vel_limit[i];
+        }
         // const ompl::base::SO2StateSpace::StateType *rot = cstate->as<ompl::base::SO2StateSpace::StateType>(0);
         // const ompl::base::RealVectorStateSpace::StateType *vel = cstate->as<ompl::base::RealVectorStateSpace::StateType>(1);
         // projection(0) = rot->value;
@@ -90,12 +136,42 @@ std::pair<std::vector<double>, std::vector<double>> computeXY(const std::vector<
     return {x, y};
 }
 
+std::pair<std::vector<double>, std::vector<double>> computeXY_links(const std::vector<double> &phi)
+{
+    std::vector<double> x_l(n, 0.0);
+    std::vector<double> y_l(n, 0.0);
+    for (int i = 0; i < n; ++i){
+        if (i == 0){
+            x_l[i] = link_lengths[i] * cos(phi[i]);
+            y_l[i] = link_lengths[i] * sin(phi[i]);
+        }
+        else{
+            x_l[i] = x_l[i - 1] + link_lengths[i] * cos(phi[i]);
+            y_l[i] = y_l[i - 1] + link_lengths[i] * sin(phi[i]);
+        }
+    }
+    return {x_l, y_l};
+}
+
+std::pair<std::vector<double>, std::vector<double>> computeXY_COM(const std::vector<double> &phi, const std::vector<double> &x, const std::vector<double> &y)
+{
+    std::vector<double> x_c(n, 0.0);
+    std::vector<double> y_c(n, 0.0);
+    for (int i = 0; i < n; ++i){
+        x_c[i] = x[0] - x[i] * link_lengths[i]/2 * cos(phi[i]);
+        y_c[i] = y[0] - y[i] * link_lengths[i]/2 * sin(phi[i]);
+    }
+    return {x_c, y_c};
+}
+
 Eigen::MatrixXd ComputeJL_i(const std::vector<double> &x, const std::vector<double> &y, const std::vector<double> &phi, int i)
 {
     Eigen::MatrixXd JL_i = Eigen::MatrixXd::Zero(2, n);
     for (int j = 0; j < n; ++j) {
-        JL_i(0, j) = -1 * y[j] + y[i] - link_lengths[i] / 2 * sin(phi[i]);
-        JL_i(1, j) = x[j] - x[i] + link_lengths[i] / 2 * cos(phi[i]);
+        if (j <= i){
+            JL_i(0, j) = -1 * y[j] + y[i] - link_lengths[i] / 2 * sin(phi[i]);
+            JL_i(1, j) = x[j] - x[i] + link_lengths[i] / 2 * cos(phi[i]);
+        }
     }
     return JL_i;
 }
@@ -172,7 +248,7 @@ Eigen::VectorXd computeCoriolisCentrifugalVector(const std::vector<double>& q, c
         Eigen::VectorXd h_i = Eigen::VectorXd::Zero(n);
 
         // Compute Psi_i for every i (link)
-        auto Psi_i = computePsi_i(phi, x, y, i);
+        auto Psi_i = computePsi_i(phi, x, y, i); // n x n matrix
 
         // Compute sumPsiQ term 
         Eigen::MatrixXd sumPsiQ = Eigen::MatrixXd::Zero(n, n);
@@ -200,7 +276,7 @@ Eigen::VectorXd computeCoriolisCentrifugalVector(const std::vector<double>& q, c
 Eigen::VectorXd computeGravityVector(const std::vector<double>& q)
 {
     Eigen::VectorXd g = Eigen::VectorXd::Zero(n);
-    // Precompute phi_i = sum q[0] to q[i]
+
     auto phi = computePhi(q);
 
     for (int i = n - 1; i >= 0; --i) {
@@ -208,8 +284,9 @@ Eigen::VectorXd computeGravityVector(const std::vector<double>& q)
             g[i] = 9.81 * masses[i] * link_lengths[i] / 2 * cos(phi[i]);
         else{
             double sumMassLink = 0;
-            for (int k = i; k < n; ++k)
+            for (int k = i + 1; k < n; ++k){
                 sumMassLink += masses[k] * link_lengths[i] * cos(phi[i]);
+            }
             g[i] = g[i + 1] + 9.81 * (masses[i] * link_lengths[i] / 2 * cos(phi[i]) + sumMassLink);
         }
     }
@@ -220,7 +297,7 @@ void ManipulatorODE(const ompl::control::ODESolver::StateType & q, const ompl::c
     ompl::control::ODESolver::StateType & qdot)
 {
     // TODO: Fill in the ODE for the Manipulator's dynamics
-    std::cout << "ManipulatorODE called" << std::endl;
+    // std::cout << "ManipulatorODE called" << std::endl;
     qdot.resize(q.size());
     // Extract the first n elements of q into q_vec
     std::vector<double> q_vec(q.begin(), q.begin() + n);
@@ -228,11 +305,11 @@ void ManipulatorODE(const ompl::control::ODESolver::StateType & q, const ompl::c
     std::vector<double> qd_vec(q.begin() + n, q.end());
 
     const double* u_values = control->as<ompl::control::RealVectorControlSpace::ControlType>()->values;
+    Eigen::VectorXd u = Eigen::Map<const Eigen::VectorXd>(u_values, n);    
     Eigen::MatrixXd M = ComputeInertiaMatrix(q_vec);
     Eigen::VectorXd C = computeCoriolisCentrifugalVector(q_vec, qd_vec);
-    Eigen::VectorXd g = computeGravityVector(q_vec);
-    Eigen::VectorXd u = Eigen::Map<const Eigen::VectorXd>(u_values, n);    
-    Eigen::VectorXd qdotdot = M.inverse() * (u - C - g);
+    Eigen::VectorXd V = computeGravityVector(q_vec);
+    Eigen::VectorXd qdotdot = M.inverse() * (u - C - V);
 
     for (int i = 0; i < n; i++){
         qdot[i] = q[n + i];
@@ -240,21 +317,83 @@ void ManipulatorODE(const ompl::control::ODESolver::StateType & q, const ompl::c
     }
 }
 
+bool checkLineIntersection(double x1, double y1, double x2, double y2,
+    double x3, double y3, double x4, double y4)
+{
+    // Compute the direction of the lines
+    double det = (x2 - x1) * (y4 - y3) - (y2 - y1) * (x4 - x3);
+    if (det == 0.0) {
+        return false; // Lines are parallel
+    }
+
+    double t = ((x3 - x1) * (y4 - y3) - (y3 - y1) * (x4 - x3)) / det;
+    double u = ((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)) / det;
+
+    return (t >= 0.0 && t <= 1.0 && u >= 0.0 && u <= 1.0);
+}
+
+bool checkLineRectangleIntersection(double x1, double y1, double x2, double y2,
+    double rect_x_min, double rect_y_min,
+    double rect_x_max, double rect_y_max)
+{
+    // Check if either endpoint is inside the rectangle
+    if ((x1 >= rect_x_min && x1 <= rect_x_max && y1 >= rect_y_min && y1 <= rect_y_max) ||
+    (x2 >= rect_x_min && x2 <= rect_x_max && y2 >= rect_y_min && y2 <= rect_y_max)) 
+    {
+        return true; // One endpoint is inside the rectangle
+    }
+
+    // Check for intersection with each edge of the rectangle
+    return checkLineIntersection(x1, y1, x2, y2, rect_x_min, rect_y_min, rect_x_max, rect_y_min) || // Bottom edge
+    checkLineIntersection(x1, y1, x2, y2, rect_x_min, rect_y_max, rect_x_max, rect_y_max) || // Top edge
+    checkLineIntersection(x1, y1, x2, y2, rect_x_min, rect_y_min, rect_x_min, rect_y_max) || // Left edge
+    checkLineIntersection(x1, y1, x2, y2, rect_x_max, rect_y_min, rect_x_max, rect_y_max);   // Right edge
+}
+
 bool isStateValid(const ompl::base::State *state)
 {
     const ompl::base::CompoundState *cstate = state->as<ompl::base::CompoundState>();
     const ompl::base::RealVectorStateSpace::StateType *omega = cstate->as<ompl::base::RealVectorStateSpace::StateType>(n);
 
+    // Check joint velocity limits
     for (int i = 0; i < n; i++) {
-        if (omega->values[i] < -1 * joint_vel_limit || omega->values[i] > joint_vel_limit)
+        if (omega->values[i] < -1 * joint_vel_limit[i] || omega->values[i] > joint_vel_limit[i])
             return false;
     }
-    return true;
+
+    // Compute the positions of the manipulator's links
+    std::vector<double> joint_angles(n);
+    for (int i = 0; i < n; ++i) {
+        const ompl::base::SO2StateSpace::StateType *joint_angle = cstate->as<ompl::base::SO2StateSpace::StateType>(i);
+        joint_angles[i] = joint_angle->value;
+    }
+
+    auto phi = computePhi(joint_angles);
+    auto [x, y] = computeXY_links(phi);
+
+
+    // Check for collision with the rectangle
+    double rect_x_min = -1.;
+    double rect_y_min = -1.;
+    double rect_x_max = rect_x_min + 0.5;
+    double rect_y_max = rect_y_min + 0.5;
+
+    for (int i = 0; i < n; ++i) {
+        double x1 = (i == 0) ? 0.0 : x[i - 1];
+        double y1 = (i == 0) ? 0.0 : y[i - 1];
+        double x2 = x[i];
+        double y2 = y[i];
+        
+        if (checkLineRectangleIntersection(x1, y1, x2, y2, rect_x_min, rect_y_min, rect_x_max, rect_y_max)) {
+            return false; // Collision detected
+        }
+    }
+
+    return true; // No collision
 }
 
 void postPropagate(const ompl::base::State* state, const ompl::control::Control* control, const double duration, ompl::base::State* result)
 {
-    
     // Access the compound state
     ompl::base::CompoundState *compoundState = result->as<ompl::base::CompoundState>();
     // Access the orientation component (theta)
@@ -264,28 +403,26 @@ void postPropagate(const ompl::base::State* state, const ompl::control::Control*
         ompl::base::SO2StateSpace::StateType *theta = compoundState->as<ompl::base::SO2StateSpace::StateType>(i);
         SO2.enforceBounds(theta);
     }
-    // ompl::base::SO2StateSpace::StateType *theta = compoundState->as<ompl::base::SO2StateSpace::StateType>(0);
-    // SO2.enforceBounds(theta);
 }
 
-
-ompl::control::SimpleSetupPtr createManipulator(double torque, int n)
+ompl::control::SimpleSetupPtr createManipulator(int n)
 {
     // TODO: Create and setup the Manipulator's state space, control space, validity checker, everything you need for
     // planning.
 
     // create state space
-    // theta 
     auto compoundSpace = std::make_shared<ompl::base::CompoundStateSpace>();
     for (int i = 0; i < n; i++){
         // create a SO2 space for joint angle
         compoundSpace->addSubspace(std::make_shared<ompl::base::SO2StateSpace>(), 1.0);
     }
-    // omega
+    // create real vector spaces for joint velocities
     auto omegaSpace = std::make_shared<ompl::base::RealVectorStateSpace>(n);
     ompl::base::RealVectorBounds bounds(n);
-    bounds.setLow(-1*joint_vel_limit);
-    bounds.setHigh(joint_vel_limit);
+    for (int i = 0; i < n; i++){
+        bounds.setLow(i, -1 * joint_vel_limit[i]);
+        bounds.setHigh(i, joint_vel_limit[i]);
+    }
     omegaSpace->setBounds(bounds);
     compoundSpace->addSubspace(omegaSpace, 1.0);
 
@@ -296,36 +433,109 @@ ompl::control::SimpleSetupPtr createManipulator(double torque, int n)
     // create control space
     auto cspace = std::make_shared<ompl::control::RealVectorControlSpace>(space, n);
     ompl::base::RealVectorBounds cbounds(n);
-    cbounds.setLow(-1*torque);
-    cbounds.setHigh(torque);
+    for (int i = 0; i < n; i++) {
+        cbounds.setLow(i, -1 * torque_limit[i]); // Set lower bound for control input i
+        cbounds.setHigh(i, torque_limit[i]);    // Set upper bound for control input i
+    }
     cspace->setBounds(cbounds);
 
     // create a simple setup object
-    auto ss = std::make_shared<ompl::control::SimpleSetup>(cspace);
+    auto ss = std::make_shared<ompl::control::SimpleSetup>(cspace);   
     ss->setStateValidityChecker(isStateValid);
 
     // set the state propagation routine
-    // TO EDIT
     auto odeSolver = std::make_shared<ompl::control::ODEBasicSolver<>>(ss->getSpaceInformation(), &ManipulatorODE);
     // ss->setStatePropagator(ompl::control::ODESolver::getStatePropagator(odeSolver));
     ss->setStatePropagator(ompl::control::ODESolver::getStatePropagator(odeSolver, &postPropagate));
 
     // create the start and goal states
     ompl::base::ScopedState<> start(space);
-    ompl::base::ScopedState<> goal(space);
+    std::vector<double> goal_center(n, 0.0);
 
-    start[0] = M_PI/2;
-    goal[0] = -M_PI;
+    start[0] = 0.;
+    goal_center[0] = -M_PI;
     for (int i = 1; i < 2*n; i++){
         start[i] = 0.;
-        goal[i] = 0.;
+        goal_center[i] = 0.;
     }
-    ss->setStartAndGoalStates(start, goal, 0.2);
+    double goal_radius = 0.1;
+    auto goal_region = std::make_shared<ManipulatorGoalRegion>(ss->getSpaceInformation(), goal_center, goal_radius);
+    
+    ss->setStartState(start);
+    ss->setGoal(goal_region);
 
     std::cout << "Manipulator setup complete" << std::endl;
 
     return ss;
 }
+
+
+void saveExploredStates(const ompl::control::SimpleSetupPtr &ss, int n)
+{
+    std::cout << "Saving explored states..." << std::endl;
+    ompl::base::PlannerData pd(ss->getSpaceInformation());
+    ss->getPlanner()->getPlannerData(pd);
+
+    std::ofstream exploredFile("explored_states.txt");
+    if (!exploredFile.is_open())
+    {
+        std::cerr << "Failed to open explored_states.txt" << std::endl;
+        return;
+    }
+
+    exploredFile << "n = " << n << std::endl;
+
+    for (unsigned int i = 0; i < pd.numVertices(); ++i)
+    {
+        const ompl::base::State *state = pd.getVertex(i).getState();
+        auto compound = state->as<ompl::base::CompoundState>();
+
+        // Assuming joint angles and velocities are stored as two RealVectorStateSpaces
+        const auto *velocities = compound->as<ompl::base::RealVectorStateSpace::StateType>(n);
+
+        // Write joint angles
+        for (int j = 0; j < n; ++j)
+        {
+            const ompl::base::SO2StateSpace::StateType *joint_angle = compound->as<ompl::base::SO2StateSpace::StateType>(j);            
+            exploredFile << joint_angle->value << " ";
+        }
+
+        // Write joint velocities
+        for (int j = 0; j < n; ++j)
+        {
+            exploredFile << velocities->values[j];
+            if (j < n - 1)
+                exploredFile << " ";
+        }
+
+        exploredFile << std::endl;
+    }
+
+    exploredFile.close();
+    std::cout << "Explored states saved to explored_states.txt!" << std::endl;
+}
+
+double computeEnergy(const std::vector<double> &q, const std::vector<double> &qd)
+{
+    // Eigen::VectorXd q_vec = Eigen::Map<Eigen::VectorXd>(q.data(), q.size());
+    Eigen::Map<const Eigen::VectorXd> qd_vec(qd.data(), qd.size());
+    auto M = ComputeInertiaMatrix(q);
+    std::cout << "Inertia Matrix: " << M << std::endl;
+    //compute energy
+    auto phi = computePhi(q);
+    auto [x, y] = computeXY(phi);
+    auto [x_c, y_c] = computeXY_COM(phi, x, y);
+
+    double E = 1/2 * qd_vec.transpose() * M * qd_vec;
+
+    for (int i = 0; i < n; i++){
+        double height_i = std::sqrt(std::pow(x_c[i], 2) + std::pow(y_c[i], 2));
+        E += 9.81 * (masses[i] * height_i);
+    }
+
+    return E;
+}
+
 
 void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice)
 {
@@ -334,14 +544,14 @@ void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice)
     if (choice == 1)
     {
         // RRT
-        ss->getSpaceInformation()->setPropagationStepSize(0.01);
+        ss->getSpaceInformation()->setPropagationStepSize(0.02);
         ompl::base::PlannerPtr planner = std::make_shared<ompl::control::RRT>(ss->getSpaceInformation());
         ss->setPlanner(planner);
     }
     else if (choice == 2)
     {
         // KPIECE1
-        ss->getSpaceInformation()->setPropagationStepSize(0.05);
+        ss->getSpaceInformation()->setPropagationStepSize(0.02);
         ompl::base::PlannerPtr planner = std::make_shared<ompl::control::KPIECE1>(ss->getSpaceInformation());
         ss->getStateSpace()->registerProjection("ManipulatorProjection", ompl::base::ProjectionEvaluatorPtr(new ManipulatorProjection(ss->getStateSpace().get())));
         planner->as<ompl::control::KPIECE1>()->setProjectionEvaluator("ManipulatorProjection");
@@ -350,7 +560,7 @@ void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice)
     else if (choice == 3)
     {
         // RG-RRT
-        ss->getSpaceInformation()->setPropagationStepSize(0.15);
+        ss->getSpaceInformation()->setPropagationStepSize(0.07);
         ompl::base::PlannerPtr planner = std::make_shared<ompl::control::RGRRT>(ss->getSpaceInformation());
         ss->setPlanner(planner);
     }
@@ -360,7 +570,7 @@ void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice)
     ss->setup();
     std::cout << "Plnner setup complete" << std::endl;
 
-    ompl::base::PlannerStatus solved = ss->solve(60.0);
+    ompl::base::PlannerStatus solved = ss->solve(120.0);
 
     if (solved)
     {
@@ -368,14 +578,42 @@ void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice)
         std::cout << "Solution found!" << std::endl;
         ompl::control::PathControl &path = ss->getSolutionPath();
         path.asGeometric().printAsMatrix(std::cout);
-
+    
         // save path to file
         std::ofstream pathFile("Manipulator_path.txt");
-        ss->getSolutionPath().asGeometric().printAsMatrix(pathFile);
-        std::cout << "saved to Manipulator_path.txt!" << std::endl;
+        if (pathFile.is_open())
+        {
+            // Write number of joints
+            pathFile << n << std::endl;
+    
+            // Write link lengths
+            for (size_t i = 0; i < n; ++i)
+            {
+                pathFile << link_lengths[i];
+                if (i < n - 1)
+                    pathFile << " ";
+            }
+            pathFile << std::endl;
+    
+            // Write the path
+            path.asGeometric().printAsMatrix(pathFile);
+    
+            std::cout << "saved to Manipulator_path.txt!" << std::endl;
+        }
+        else
+        {
+            std::cerr << "Failed to open Manipulator_path.txt for writing!" << std::endl;
+        }
+    }
+    else if (ss->getProblemDefinition()->hasApproximateSolution())
+    {
+        std::cout << "Approximate solution found!" << std::endl;
+        ompl::control::PathControl &path = ss->getSolutionPath();
+        path.asGeometric().printAsMatrix(std::cout);
     }
     else
     {
+        saveExploredStates(ss, n);
         std::cout << "No solution found" << std::endl;
     }
 
@@ -384,21 +622,21 @@ void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice)
 void benchmarkManipulator(ompl::control::SimpleSetupPtr &ss)
 {
     // TODO: Do some benchmarking for the Manipulator
-    double runtime_limit = 20, memory_limit = 1024;
-    int run_count = 20;
+    double runtime_limit = 60, memory_limit = 1024;
+    int run_count = 10;
     ompl::tools::Benchmark::Request request(runtime_limit, memory_limit, run_count, 0.5);
     ompl::tools::Benchmark b(*ss, "Manipulator");
 
     // RRT
     {
-        ss->getSpaceInformation()->setPropagationStepSize(0.01);
+        ss->getSpaceInformation()->setPropagationStepSize(0.02);
         ompl::base::PlannerPtr planner = std::make_shared<ompl::control::RRT>(ss->getSpaceInformation());
         planner->setName("RRT");
         b.addPlanner(planner);
     }
     // KPIECE1
     {
-        ss->getSpaceInformation()->setPropagationStepSize(0.05);
+        ss->getSpaceInformation()->setPropagationStepSize(0.02);
         ompl::base::PlannerPtr planner = std::make_shared<ompl::control::KPIECE1>(ss->getSpaceInformation());
         ss->getStateSpace()->registerProjection("ManipulatorProjection", ompl::base::ProjectionEvaluatorPtr(new ManipulatorProjection(ss->getStateSpace().get())));
         planner->as<ompl::control::KPIECE1>()->setProjectionEvaluator("ManipulatorProjection");
@@ -407,7 +645,7 @@ void benchmarkManipulator(ompl::control::SimpleSetupPtr &ss)
     }
     // RG-RRT
     {
-        ss->getSpaceInformation()->setPropagationStepSize(0.1);
+        ss->getSpaceInformation()->setPropagationStepSize(0.07);
         ompl::base::PlannerPtr planner = std::make_shared<ompl::control::RGRRT>(ss->getSpaceInformation());
         planner->setName("RG-RRT");
         b.addPlanner(planner);
@@ -428,9 +666,10 @@ int main(int /* argc */, char ** /* argv */)
         std::cout << "Plan or Benchmark? " << std::endl;
         std::cout << " (1) Plan" << std::endl;
         std::cout << " (2) Benchmark" << std::endl;
+        std::cout << " (3) Compute energy" << std::endl;
 
         std::cin >> choice;
-    } while (choice < 1 || choice > 2);
+    } while (choice < 1 || choice > 3);
 
     // Get the number of joints
     do{
@@ -442,7 +681,13 @@ int main(int /* argc */, char ** /* argv */)
     // Get link lengths and masses
     link_lengths = new double[n];
     masses = new double[n];
+    torque_limit = new double[n];
+    joint_vel_limit = new double[n];
     for (int i = 0; i < n; i++){
+        std::cout << "Joint " << i+1 << " torque limit?" << std::endl;
+        std::cin >> torque_limit[i];
+        std::cout << "Joint " << i+1 << " velocity limit?" << std::endl;
+        std::cin >> joint_vel_limit[i];
         std::cout << "Link " << i+1 << " length?" << std::endl;
         std::cin >> link_lengths[i];
         std::cout << "Link " << i+1 << " mass?" << std::endl;
@@ -450,36 +695,13 @@ int main(int /* argc */, char ** /* argv */)
     }
 
     for (int i = 0; i < n; i++) {
+        std::cout << "Joint " << i + 1 << " torque limit: " << torque_limit[i] << std::endl;
+        std::cout << "Joint " << i + 1 << " velocity limit: " << joint_vel_limit[i] << std::endl;
         std::cout << "Link " << i + 1 << " length: " << link_lengths[i] << std::endl;
         std::cout << "Link " << i + 1 << " mass: " << masses[i] << std::endl;
-
     }
 
-    // Get torque and joint velocity limit
-    do
-    {
-        std::cout << "Torque limit? " << std::endl;
-        std::cin >> torque_limit;
-        std::cout << "Joint velocity limit? " << std::endl;
-        std::cin >> joint_vel_limit;
-    } while (torque_limit < 0 && joint_vel_limit > 0);
-
-    ompl::control::SimpleSetupPtr ss = createManipulator(torque_limit, n);
-
-    // DEBUGGING
-    // std::vector<double> q = {0.0, 0.0};
-    // std::vector<double> qd = {0.0, 0.0};
-    // std::vector<double> control = {0.0, 0.0};
-    // Eigen::VectorXd u = Eigen::Map<const Eigen::VectorXd>(control.data(), control.size());
-    // auto M = ComputeInertiaMatrix(q);
-    // std::cout << "Inertia Matrix: " << M << std::endl;
-    // auto C = computeCoriolisCentrifugalVector(q, qd);
-    // std::cout << "Coriolis/Centrifugal Vector: " << C << std::endl;
-    // auto g = computeGravityVector(q);
-    // std::cout << "Gravity Vector: " << g << std::endl;
-    // auto qdotdot = M.inverse() * (u - C - g);
-    // std::cout << "qdotdot: " << qdotdot << std::endl;
-    // DEBUGGING END
+    ompl::control::SimpleSetupPtr ss = createManipulator(n);
 
     // Planning
     if (choice == 1)
@@ -500,6 +722,17 @@ int main(int /* argc */, char ** /* argv */)
     // Benchmarking
     else if (choice == 2)
         benchmarkManipulator(ss);
+    else if (choice == 3){
+        std::vector<double> q_in = {0, 0};
+        std::vector<double> qd_in = {0, 0};
+        double E_initial = computeEnergy(q_in, qd_in);
+        std::cout << "E_initial: " << E_initial << std::endl;
+    
+        std::vector<double> q_fi = {-0.904313, 0.809023};
+        std::vector<double> qd_fi = {-3.4796, -4.27405};
+        double E_final = computeEnergy(q_fi, qd_fi);
+        std::cout << "E_final: " << E_final << std::endl;
+    }
 
     else
         std::cerr << "How did you get here? Invalid choice." << std::endl;

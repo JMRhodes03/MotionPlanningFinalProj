@@ -240,8 +240,13 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/result_of.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/underlying_type.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_final.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/pointer_traits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/conjunction.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/disjunction.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/has_unique_object_representation.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_aggregate.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_swappable.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/negation.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/pointer_traits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/limits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocate_at_least.h \
@@ -253,7 +258,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/tuple_indices.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/integer_sequence.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/dependent_type.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_swappable.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/piecewise_construct.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/uninitialized_algorithms.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy.h \
@@ -287,7 +291,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/iterator_traits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/pair.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/readable_traits.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/disjunction.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/advance.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/convert_to_integral.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/unreachable.h \
@@ -344,7 +347,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/view_interface.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/empty.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_unbounded_array.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/negation.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/exception_guard.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/unique_ptr.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/hash.h \
@@ -409,6 +411,8 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_mbstate_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/utility \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/rel_ops.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/as_const.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/in_place.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/no_destroy.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/private_constructor_tag.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cctype \
@@ -524,7 +528,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/movable_box.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/optional \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/in_place.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/atomic \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/aliases.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic.h \
@@ -658,8 +661,10 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/transform.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unique.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unique_copy.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/execution \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_execution_policy.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/clamp.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each_n.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sample.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bit \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/error_category.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/error_code.h \
@@ -739,6 +744,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/builtin_new_allocator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/strip_signature.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/boyer_moore_searcher.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/unordered_map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/is_transparent.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__hash_table \
@@ -780,119 +786,34 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_upper_bound.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/indic_conjunct_break_table.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/width_estimation_table.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/default_searcher.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/not_fn.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/perfect_forward.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/stack.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/filesystem \
-  /opt/homebrew/include/ompl-1.7/ompl/base/ProjectionEvaluator.h \
-  /opt/homebrew/include/ompl-1.7/ompl/base/State.h \
-  /opt/homebrew/include/boost/concept_check.hpp \
-  /opt/homebrew/include/boost/concept/assert.hpp \
-  /opt/homebrew/include/boost/config.hpp \
-  /opt/homebrew/include/boost/config/user.hpp \
-  /opt/homebrew/include/boost/config/detail/select_compiler_config.hpp \
-  /opt/homebrew/include/boost/config/compiler/clang.hpp \
-  /opt/homebrew/include/boost/config/compiler/clang_version.hpp \
-  /opt/homebrew/include/boost/config/detail/select_stdlib_config.hpp \
-  /opt/homebrew/include/boost/config/stdlib/libcpp.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/shared_mutex \
-  /opt/homebrew/include/boost/config/detail/select_platform_config.hpp \
-  /opt/homebrew/include/boost/config/platform/macos.hpp \
-  /opt/homebrew/include/boost/config/detail/posix_features.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/unistd.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_posix_vdisable.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/select.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_select.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uuid_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/gethostuuid.h \
-  /opt/homebrew/include/boost/config/detail/suffix.hpp \
-  /opt/homebrew/include/boost/config/helper_macros.hpp \
-  /opt/homebrew/include/boost/config/detail/cxx_composite.hpp \
-  /opt/homebrew/include/boost/config/workaround.hpp \
-  /opt/homebrew/include/boost/concept/detail/general.hpp \
-  /opt/homebrew/include/boost/preprocessor/cat.hpp \
-  /opt/homebrew/include/boost/preprocessor/config/config.hpp \
-  /opt/homebrew/include/boost/concept/detail/backward_compatibility.hpp \
-  /opt/homebrew/include/boost/concept/detail/has_constraints.hpp \
-  /opt/homebrew/include/boost/type_traits/integral_constant.hpp \
-  /opt/homebrew/include/boost/detail/workaround.hpp \
-  /opt/homebrew/include/boost/type_traits/conditional.hpp \
-  /opt/homebrew/include/boost/type_traits/conversion_traits.hpp \
-  /opt/homebrew/include/boost/type_traits/is_convertible.hpp \
-  /opt/homebrew/include/boost/type_traits/intrinsics.hpp \
-  /opt/homebrew/include/boost/type_traits/detail/config.hpp \
-  /opt/homebrew/include/boost/version.hpp \
-  /opt/homebrew/include/boost/type_traits/is_complete.hpp \
-  /opt/homebrew/include/boost/type_traits/declval.hpp \
-  /opt/homebrew/include/boost/type_traits/add_rvalue_reference.hpp \
-  /opt/homebrew/include/boost/type_traits/is_void.hpp \
-  /opt/homebrew/include/boost/type_traits/is_reference.hpp \
-  /opt/homebrew/include/boost/type_traits/is_lvalue_reference.hpp \
-  /opt/homebrew/include/boost/type_traits/is_rvalue_reference.hpp \
-  /opt/homebrew/include/boost/type_traits/remove_reference.hpp \
-  /opt/homebrew/include/boost/type_traits/is_function.hpp \
-  /opt/homebrew/include/boost/type_traits/detail/is_function_cxx_11.hpp \
-  /opt/homebrew/include/boost/type_traits/detail/yes_no_type.hpp \
-  /opt/homebrew/include/boost/type_traits/is_array.hpp \
-  /opt/homebrew/include/boost/static_assert.hpp \
-  /opt/homebrew/include/boost/type_traits/is_same.hpp \
-  /opt/homebrew/include/boost/concept/usage.hpp \
-  /opt/homebrew/include/boost/concept/detail/concept_def.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/for_each_i.hpp \
-  /opt/homebrew/include/boost/preprocessor/arithmetic/dec.hpp \
-  /opt/homebrew/include/boost/preprocessor/config/limits.hpp \
-  /opt/homebrew/include/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/arithmetic/inc.hpp \
-  /opt/homebrew/include/boost/preprocessor/arithmetic/limits/inc_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/control/if.hpp \
-  /opt/homebrew/include/boost/preprocessor/control/iif.hpp \
-  /opt/homebrew/include/boost/preprocessor/logical/bool.hpp \
-  /opt/homebrew/include/boost/preprocessor/logical/limits/bool_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/repetition/for.hpp \
-  /opt/homebrew/include/boost/preprocessor/debug/error.hpp \
-  /opt/homebrew/include/boost/preprocessor/facilities/empty.hpp \
-  /opt/homebrew/include/boost/preprocessor/detail/auto_rec.hpp \
-  /opt/homebrew/include/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/repetition/detail/for.hpp \
-  /opt/homebrew/include/boost/preprocessor/control/expr_iif.hpp \
-  /opt/homebrew/include/boost/preprocessor/tuple/eat.hpp \
-  /opt/homebrew/include/boost/preprocessor/repetition/detail/limits/for_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/repetition/limits/for_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/seq.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/elem.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/limits/elem_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/size.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/limits/size_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/detail/is_empty.hpp \
-  /opt/homebrew/include/boost/preprocessor/logical/compl.hpp \
-  /opt/homebrew/include/boost/preprocessor/tuple/elem.hpp \
-  /opt/homebrew/include/boost/preprocessor/facilities/expand.hpp \
-  /opt/homebrew/include/boost/preprocessor/facilities/overload.hpp \
-  /opt/homebrew/include/boost/preprocessor/variadic/size.hpp \
-  /opt/homebrew/include/boost/preprocessor/facilities/check_empty.hpp \
-  /opt/homebrew/include/boost/preprocessor/variadic/has_opt.hpp \
-  /opt/homebrew/include/boost/preprocessor/variadic/limits/size_64.hpp \
-  /opt/homebrew/include/boost/preprocessor/tuple/rem.hpp \
-  /opt/homebrew/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /opt/homebrew/include/boost/preprocessor/variadic/elem.hpp \
-  /opt/homebrew/include/boost/preprocessor/variadic/limits/elem_64.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/enum.hpp \
-  /opt/homebrew/include/boost/preprocessor/seq/limits/enum_256.hpp \
-  /opt/homebrew/include/boost/preprocessor/comma_if.hpp \
-  /opt/homebrew/include/boost/preprocessor/punctuation/comma_if.hpp \
-  /opt/homebrew/include/boost/preprocessor/punctuation/comma.hpp \
-  /opt/homebrew/include/boost/concept/detail/concept_undef.hpp \
-  /opt/homebrew/include/ompl-1.7/ompl/util/ClassForward.h \
-  /opt/homebrew/include/ompl-1.7/ompl/util/Console.h \
-  /opt/homebrew/include/ompl-1.7/ompl/base/GenericParam.h \
-  /opt/homebrew/include/ompl-1.7/ompl/util/String.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
-  /opt/homebrew/include/ompl-1.7/ompl/base/spaces/RealVectorBounds.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/valarray \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/copy_options.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/directory_entry.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/file_status.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/file_type.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/perms.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/file_time_type.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iomanip \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/operations.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/perm_options.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/space_info.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/directory_iterator.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/directory_options.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/u8path.h \
+  /opt/homebrew/include/eigen3/Eigen/Dense \
   /opt/homebrew/include/eigen3/Eigen/Core \
   /opt/homebrew/include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
   /opt/homebrew/include/eigen3/Eigen/src/Core/util/Macros.h \
@@ -902,6 +823,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/arm_vector_types.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/arm_fp16.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/complex \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /opt/homebrew/include/eigen3/Eigen/src/Core/util/MKL_support.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cassert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/assert.h \
@@ -1029,6 +951,177 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /opt/homebrew/include/eigen3/Eigen/src/Core/StlIterators.h \
   /opt/homebrew/include/eigen3/Eigen/src/Core/GlobalFunctions.h \
   /opt/homebrew/include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+  /opt/homebrew/include/eigen3/Eigen/LU \
+  /opt/homebrew/include/eigen3/Eigen/src/misc/Kernel.h \
+  /opt/homebrew/include/eigen3/Eigen/src/misc/Image.h \
+  /opt/homebrew/include/eigen3/Eigen/src/LU/FullPivLU.h \
+  /opt/homebrew/include/eigen3/Eigen/src/LU/PartialPivLU.h \
+  /opt/homebrew/include/eigen3/Eigen/src/LU/Determinant.h \
+  /opt/homebrew/include/eigen3/Eigen/src/LU/InverseImpl.h \
+  /opt/homebrew/include/eigen3/Eigen/src/LU/arch/InverseSize4.h \
+  /opt/homebrew/include/eigen3/Eigen/Cholesky \
+  /opt/homebrew/include/eigen3/Eigen/Jacobi \
+  /opt/homebrew/include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Cholesky/LLT.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Cholesky/LDLT.h \
+  /opt/homebrew/include/eigen3/Eigen/QR \
+  /opt/homebrew/include/eigen3/Eigen/Householder \
+  /opt/homebrew/include/eigen3/Eigen/src/Householder/Householder.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+  /opt/homebrew/include/eigen3/Eigen/src/QR/HouseholderQR.h \
+  /opt/homebrew/include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+  /opt/homebrew/include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+  /opt/homebrew/include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+  /opt/homebrew/include/eigen3/Eigen/SVD \
+  /opt/homebrew/include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+  /opt/homebrew/include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+  /opt/homebrew/include/eigen3/Eigen/src/SVD/SVDBase.h \
+  /opt/homebrew/include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+  /opt/homebrew/include/eigen3/Eigen/src/SVD/BDCSVD.h \
+  /opt/homebrew/include/eigen3/Eigen/Geometry \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/RotationBase.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Quaternion.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Transform.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Translation.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Scaling.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/Umeyama.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Geometry/arch/Geometry_SIMD.h \
+  /opt/homebrew/include/eigen3/Eigen/Eigenvalues \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/Tridiagonalization.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/RealSchur.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/./HessenbergDecomposition.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/EigenSolver.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/./RealSchur.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/./Tridiagonalization.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/ComplexSchur.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/./ComplexSchur.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/RealQZ.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/./RealQZ.h \
+  /opt/homebrew/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  /opt/homebrew/include/ompl-1.7/ompl/base/ProjectionEvaluator.h \
+  /opt/homebrew/include/ompl-1.7/ompl/base/State.h \
+  /opt/homebrew/include/boost/concept_check.hpp \
+  /opt/homebrew/include/boost/concept/assert.hpp \
+  /opt/homebrew/include/boost/config.hpp \
+  /opt/homebrew/include/boost/config/user.hpp \
+  /opt/homebrew/include/boost/config/detail/select_compiler_config.hpp \
+  /opt/homebrew/include/boost/config/compiler/clang.hpp \
+  /opt/homebrew/include/boost/config/compiler/clang_version.hpp \
+  /opt/homebrew/include/boost/config/detail/select_stdlib_config.hpp \
+  /opt/homebrew/include/boost/config/stdlib/libcpp.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/shared_mutex \
+  /opt/homebrew/include/boost/config/detail/select_platform_config.hpp \
+  /opt/homebrew/include/boost/config/platform/macos.hpp \
+  /opt/homebrew/include/boost/config/detail/posix_features.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/unistd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_posix_vdisable.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/select.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_select.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uuid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/gethostuuid.h \
+  /opt/homebrew/include/boost/config/detail/suffix.hpp \
+  /opt/homebrew/include/boost/config/helper_macros.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/any \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory_resource \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/charconv \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/execution \
+  /opt/homebrew/include/boost/config/detail/cxx_composite.hpp \
+  /opt/homebrew/include/boost/config/workaround.hpp \
+  /opt/homebrew/include/boost/concept/detail/general.hpp \
+  /opt/homebrew/include/boost/preprocessor/cat.hpp \
+  /opt/homebrew/include/boost/preprocessor/config/config.hpp \
+  /opt/homebrew/include/boost/concept/detail/backward_compatibility.hpp \
+  /opt/homebrew/include/boost/concept/detail/has_constraints.hpp \
+  /opt/homebrew/include/boost/type_traits/integral_constant.hpp \
+  /opt/homebrew/include/boost/detail/workaround.hpp \
+  /opt/homebrew/include/boost/type_traits/conditional.hpp \
+  /opt/homebrew/include/boost/type_traits/conversion_traits.hpp \
+  /opt/homebrew/include/boost/type_traits/is_convertible.hpp \
+  /opt/homebrew/include/boost/type_traits/intrinsics.hpp \
+  /opt/homebrew/include/boost/type_traits/detail/config.hpp \
+  /opt/homebrew/include/boost/version.hpp \
+  /opt/homebrew/include/boost/type_traits/is_complete.hpp \
+  /opt/homebrew/include/boost/type_traits/declval.hpp \
+  /opt/homebrew/include/boost/type_traits/add_rvalue_reference.hpp \
+  /opt/homebrew/include/boost/type_traits/is_void.hpp \
+  /opt/homebrew/include/boost/type_traits/is_reference.hpp \
+  /opt/homebrew/include/boost/type_traits/is_lvalue_reference.hpp \
+  /opt/homebrew/include/boost/type_traits/is_rvalue_reference.hpp \
+  /opt/homebrew/include/boost/type_traits/remove_reference.hpp \
+  /opt/homebrew/include/boost/type_traits/is_function.hpp \
+  /opt/homebrew/include/boost/type_traits/detail/is_function_cxx_11.hpp \
+  /opt/homebrew/include/boost/type_traits/detail/yes_no_type.hpp \
+  /opt/homebrew/include/boost/type_traits/is_array.hpp \
+  /opt/homebrew/include/boost/static_assert.hpp \
+  /opt/homebrew/include/boost/type_traits/is_same.hpp \
+  /opt/homebrew/include/boost/concept/usage.hpp \
+  /opt/homebrew/include/boost/concept/detail/concept_def.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/for_each_i.hpp \
+  /opt/homebrew/include/boost/preprocessor/arithmetic/dec.hpp \
+  /opt/homebrew/include/boost/preprocessor/config/limits.hpp \
+  /opt/homebrew/include/boost/preprocessor/arithmetic/limits/dec_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/arithmetic/inc.hpp \
+  /opt/homebrew/include/boost/preprocessor/arithmetic/limits/inc_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/control/if.hpp \
+  /opt/homebrew/include/boost/preprocessor/control/iif.hpp \
+  /opt/homebrew/include/boost/preprocessor/logical/bool.hpp \
+  /opt/homebrew/include/boost/preprocessor/logical/limits/bool_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/repetition/for.hpp \
+  /opt/homebrew/include/boost/preprocessor/debug/error.hpp \
+  /opt/homebrew/include/boost/preprocessor/facilities/empty.hpp \
+  /opt/homebrew/include/boost/preprocessor/detail/auto_rec.hpp \
+  /opt/homebrew/include/boost/preprocessor/detail/limits/auto_rec_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/repetition/detail/for.hpp \
+  /opt/homebrew/include/boost/preprocessor/control/expr_iif.hpp \
+  /opt/homebrew/include/boost/preprocessor/tuple/eat.hpp \
+  /opt/homebrew/include/boost/preprocessor/repetition/detail/limits/for_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/repetition/limits/for_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/seq.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/elem.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/limits/elem_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/size.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/limits/size_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/detail/is_empty.hpp \
+  /opt/homebrew/include/boost/preprocessor/logical/compl.hpp \
+  /opt/homebrew/include/boost/preprocessor/tuple/elem.hpp \
+  /opt/homebrew/include/boost/preprocessor/facilities/expand.hpp \
+  /opt/homebrew/include/boost/preprocessor/facilities/overload.hpp \
+  /opt/homebrew/include/boost/preprocessor/variadic/size.hpp \
+  /opt/homebrew/include/boost/preprocessor/facilities/check_empty.hpp \
+  /opt/homebrew/include/boost/preprocessor/variadic/has_opt.hpp \
+  /opt/homebrew/include/boost/preprocessor/variadic/limits/size_64.hpp \
+  /opt/homebrew/include/boost/preprocessor/tuple/rem.hpp \
+  /opt/homebrew/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /opt/homebrew/include/boost/preprocessor/variadic/elem.hpp \
+  /opt/homebrew/include/boost/preprocessor/variadic/limits/elem_64.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/enum.hpp \
+  /opt/homebrew/include/boost/preprocessor/seq/limits/enum_256.hpp \
+  /opt/homebrew/include/boost/preprocessor/comma_if.hpp \
+  /opt/homebrew/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /opt/homebrew/include/boost/preprocessor/punctuation/comma.hpp \
+  /opt/homebrew/include/boost/concept/detail/concept_undef.hpp \
+  /opt/homebrew/include/ompl-1.7/ompl/util/ClassForward.h \
+  /opt/homebrew/include/ompl-1.7/ompl/util/Console.h \
+  /opt/homebrew/include/ompl-1.7/ompl/base/GenericParam.h \
+  /opt/homebrew/include/ompl-1.7/ompl/util/String.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
+  /opt/homebrew/include/ompl-1.7/ompl/base/spaces/RealVectorBounds.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/valarray \
   /opt/homebrew/include/ompl-1.7/ompl/control/SpaceInformation.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/SpaceInformation.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/StateValidityChecker.h \
@@ -1057,6 +1150,15 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/inner_product.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/iota.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/partial_sum.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/exclusive_scan.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/gcd_lcm.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/inclusive_scan.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/pstl.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/reduce.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/transform_exclusive_scan.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/transform_inclusive_scan.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/transform_reduce.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_execution_policy.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/extreme_value_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/fisher_f_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/geometric_distribution.h \
@@ -1087,11 +1189,12 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /opt/homebrew/include/ompl-1.7/ompl/control/ControlSpaceTypes.h \
   /opt/homebrew/include/ompl-1.7/ompl/control/DirectedControlSampler.h \
   /opt/homebrew/include/ompl-1.7/ompl/control/StatePropagator.h \
+  /opt/homebrew/include/ompl-1.7/ompl/base/goals/GoalRegion.h \
+  /opt/homebrew/include/ompl-1.7/ompl/base/Goal.h \
+  /opt/homebrew/include/ompl-1.7/ompl/base/GoalTypes.h \
   /opt/homebrew/include/ompl-1.7/ompl/control/SimpleSetup.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/Planner.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/ProblemDefinition.h \
-  /opt/homebrew/include/ompl-1.7/ompl/base/Goal.h \
-  /opt/homebrew/include/ompl-1.7/ompl/base/GoalTypes.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/Path.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/Cost.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/SolutionNonExistenceProof.h \
@@ -1103,9 +1206,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /opt/homebrew/include/ompl-1.7/ompl/base/PlannerTerminationCondition.h \
   /opt/homebrew/include/ompl-1.7/ompl/util/Time.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/chrono \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iomanip \
   /opt/homebrew/include/ompl-1.7/ompl/control/PlannerData.h \
   /opt/homebrew/include/boost/serialization/base_object.hpp \
   /opt/homebrew/include/boost/mpl/eval_if.hpp \
@@ -1559,14 +1660,11 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /opt/homebrew/include/boost/iterator/iterator_facade.hpp \
   /opt/homebrew/include/boost/iterator/interoperable.hpp \
   /opt/homebrew/include/boost/iterator/detail/type_traits/disjunction.hpp \
-  /opt/homebrew/include/boost/type_traits/disjunction.hpp \
   /opt/homebrew/include/boost/iterator/detail/facade_iterator_category.hpp \
   /opt/homebrew/include/boost/iterator/detail/type_traits/conjunction.hpp \
-  /opt/homebrew/include/boost/type_traits/conjunction.hpp \
   /opt/homebrew/include/boost/iterator/detail/config_def.hpp \
   /opt/homebrew/include/boost/iterator/detail/config_undef.hpp \
   /opt/homebrew/include/boost/iterator/detail/type_traits/negation.hpp \
-  /opt/homebrew/include/boost/type_traits/negation.hpp \
   /opt/homebrew/include/boost/iterator/enable_if_convertible.hpp \
   /opt/homebrew/include/boost/iterator/detail/eval_if_default.hpp \
   /opt/homebrew/include/boost/iterator/detail/type_traits/type_identity.hpp \
@@ -1999,9 +2097,11 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /opt/homebrew/include/boost/type_traits/remove_bounds.hpp \
   /opt/homebrew/include/boost/type_traits/remove_extent.hpp \
   /opt/homebrew/include/boost/type_traits/detail/mp_defer.hpp \
+  /opt/homebrew/include/boost/type_traits/conjunction.hpp \
   /opt/homebrew/include/boost/type_traits/copy_cv.hpp \
   /opt/homebrew/include/boost/type_traits/copy_cv_ref.hpp \
   /opt/homebrew/include/boost/type_traits/copy_reference.hpp \
+  /opt/homebrew/include/boost/type_traits/disjunction.hpp \
   /opt/homebrew/include/boost/type_traits/enable_if.hpp \
   /opt/homebrew/include/boost/type_traits/extent.hpp \
   /opt/homebrew/include/boost/type_traits/floating_point_promotion.hpp \
@@ -2061,6 +2161,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /opt/homebrew/include/boost/type_traits/detail/is_swappable_cxx_11.hpp \
   /opt/homebrew/include/boost/type_traits/is_object.hpp \
   /opt/homebrew/include/boost/type_traits/is_scoped_enum.hpp \
+  /opt/homebrew/include/boost/type_traits/negation.hpp \
   /opt/homebrew/include/boost/type_traits/is_swappable.hpp \
   /opt/homebrew/include/boost/type_traits/is_trivially_copyable.hpp \
   /opt/homebrew/include/boost/type_traits/is_union.hpp \
@@ -2225,7 +2326,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: \
   /opt/homebrew/include/ompl-1.7/ompl/util/DisableCompilerWarning.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/goals/GoalStates.h \
   /opt/homebrew/include/ompl-1.7/ompl/base/goals/GoalSampleableRegion.h \
-  /opt/homebrew/include/ompl-1.7/ompl/base/goals/GoalRegion.h \
   /opt/homebrew/include/ompl-1.7/ompl/tools/benchmark/Benchmark.h \
   /opt/homebrew/include/ompl-1.7/ompl/geometric/SimpleSetup.h \
   /opt/homebrew/include/ompl-1.7/ompl/geometric/PathSimplifier.h \
