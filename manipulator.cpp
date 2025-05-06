@@ -383,6 +383,29 @@ void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice) {
     }
 }
 
+void visualizePath(const ompl::control::PathControl& path) {
+    std::ofstream out("manipulator_path_animation.txt");
+    
+    // Write header with number of joints
+    out << n << "\n";
+    
+    // Create a non-const copy for iteration
+    ompl::control::PathControl pathCopy(path);
+    const auto& states = pathCopy.getStates();
+    
+    for (const auto& state : states) {
+        const auto* cstate = state->as<ompl::base::CompoundState>();
+        
+        // Write joint angles
+        for (int j = 0; j < n; j++) {
+            const auto* theta = cstate->as<ompl::base::SO2StateSpace::StateType>(j);
+            out << theta->value << " ";
+        }
+        out << "\n";
+    }
+    std::cout << "Animation data saved to manipulator_path_animation.txt" << std::endl;
+}
+
 void benchmarkManipulator(ompl::control::SimpleSetupPtr &ss) {
     double runtime_limit = 20, memory_limit = 1024;
     int run_count = 20;
@@ -461,6 +484,7 @@ int main(int /* argc */, char ** /* argv */) {
             std::cin >> planner;
         } while (planner < 1 || planner > 3);
         planManipulator(ss, planner);
+        visualizePath(ss->getSolutionPath());
     }
     else {
         benchmarkManipulator(ss);
