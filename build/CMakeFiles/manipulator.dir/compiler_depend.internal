@@ -2464,7 +2464,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdarg.h
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h
- /Users/jessicarhodes/Downloads/School/RBE/550/Projects/FinalProject/MotionPlanningFinalProj/RG-RRT-Kang.h
+ /Users/jessicarhodes/Downloads/School/RBE/550/Projects/FinalProject/MotionPlanningFinalProj/RG-RRT-Rhodes.h
  /opt/homebrew/include/boost/assert.hpp
  /opt/homebrew/include/boost/assert/source_location.hpp
  /opt/homebrew/include/boost/blank.hpp
@@ -3860,6 +3860,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o
  /opt/homebrew/include/ompl-1.6/ompl/base/samplers/InformedStateSampler.h
  /opt/homebrew/include/ompl-1.6/ompl/base/spaces/RealVectorBounds.h
  /opt/homebrew/include/ompl-1.6/ompl/base/spaces/RealVectorStateSpace.h
+ /opt/homebrew/include/ompl-1.6/ompl/base/spaces/SE2StateSpace.h
  /opt/homebrew/include/ompl-1.6/ompl/base/spaces/SO2StateSpace.h
  /opt/homebrew/include/ompl-1.6/ompl/config.h
  /opt/homebrew/include/ompl-1.6/ompl/control/Control.h
@@ -3882,7 +3883,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o
  /opt/homebrew/include/ompl-1.6/ompl/datastructures/GridB.h
  /opt/homebrew/include/ompl-1.6/ompl/datastructures/GridN.h
  /opt/homebrew/include/ompl-1.6/ompl/datastructures/NearestNeighbors.h
- /opt/homebrew/include/ompl-1.6/ompl/datastructures/NearestNeighborsLinear.h
  /opt/homebrew/include/ompl-1.6/ompl/geometric/PathGeometric.h
  /opt/homebrew/include/ompl-1.6/ompl/geometric/PathSimplifier.h
  /opt/homebrew/include/ompl-1.6/ompl/geometric/SimpleSetup.h

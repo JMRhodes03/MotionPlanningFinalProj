@@ -326,7 +326,7 @@ ompl::control::SimpleSetupPtr createManipulator(double torque, int n) {
         start[i] = 0.;
         goal[i] = 0.;
     }
-    ss->setStartAndGoalStates(start, goal, 0.2);
+    ss->setStartAndGoalStates(start, goal, 0.5);
 
     return ss;
 }
@@ -356,7 +356,7 @@ void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice) {
     }
 
     ss->setup();
-    ompl::base::PlannerStatus solved = ss->solve(60.0);
+    ompl::base::PlannerStatus solved = ss->solve(120.0);
 
     if (solved) {
         std::cout << "Solution found!" << std::endl;

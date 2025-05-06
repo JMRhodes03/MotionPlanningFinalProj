@@ -2462,7 +2462,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: /Users/jessicarhodes/Downloads/Sch
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h \
-  /Users/jessicarhodes/Downloads/School/RBE/550/Projects/FinalProject/MotionPlanningFinalProj/RG-RRT-Kang.h \
+  /Users/jessicarhodes/Downloads/School/RBE/550/Projects/FinalProject/MotionPlanningFinalProj/RG-RRT-Rhodes.h \
   /opt/homebrew/include/boost/assert.hpp \
   /opt/homebrew/include/boost/assert/source_location.hpp \
   /opt/homebrew/include/boost/blank.hpp \
@@ -3858,6 +3858,7 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: /Users/jessicarhodes/Downloads/Sch
   /opt/homebrew/include/ompl-1.6/ompl/base/samplers/InformedStateSampler.h \
   /opt/homebrew/include/ompl-1.6/ompl/base/spaces/RealVectorBounds.h \
   /opt/homebrew/include/ompl-1.6/ompl/base/spaces/RealVectorStateSpace.h \
+  /opt/homebrew/include/ompl-1.6/ompl/base/spaces/SE2StateSpace.h \
   /opt/homebrew/include/ompl-1.6/ompl/base/spaces/SO2StateSpace.h \
   /opt/homebrew/include/ompl-1.6/ompl/config.h \
   /opt/homebrew/include/ompl-1.6/ompl/control/Control.h \
@@ -3880,7 +3881,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: /Users/jessicarhodes/Downloads/Sch
   /opt/homebrew/include/ompl-1.6/ompl/datastructures/GridB.h \
   /opt/homebrew/include/ompl-1.6/ompl/datastructures/GridN.h \
   /opt/homebrew/include/ompl-1.6/ompl/datastructures/NearestNeighbors.h \
-  /opt/homebrew/include/ompl-1.6/ompl/datastructures/NearestNeighborsLinear.h \
   /opt/homebrew/include/ompl-1.6/ompl/geometric/PathGeometric.h \
   /opt/homebrew/include/ompl-1.6/ompl/geometric/PathSimplifier.h \
   /opt/homebrew/include/ompl-1.6/ompl/geometric/SimpleSetup.h \
@@ -3914,6 +3914,8 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: /Users/jessicarhodes/Downloads/Sch
 /opt/homebrew/include/ompl-1.6/ompl/control/SimpleSetup.h:
 
 /opt/homebrew/include/ompl-1.6/ompl/control/ODESolver.h:
+
+/opt/homebrew/include/ompl-1.6/ompl/base/spaces/SE2StateSpace.h:
 
 /opt/homebrew/include/ompl-1.6/ompl/base/samplers/InformedStateSampler.h:
 
@@ -4949,10 +4951,6 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: /Users/jessicarhodes/Downloads/Sch
 
 /opt/homebrew/include/boost/fusion/iterator/deref.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__iterator/readable_traits.h:
-
-/opt/homebrew/include/boost/fusion/iterator/advance.hpp:
-
 /opt/homebrew/include/boost/fusion/iterator.hpp:
 
 /opt/homebrew/include/boost/fusion/iterator/detail/adapt_deref_traits.hpp:
@@ -5176,6 +5174,8 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: /Users/jessicarhodes/Downloads/Sch
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__ranges/from_range.h:
 
 /opt/homebrew/include/boost/assert.hpp:
+
+/Users/jessicarhodes/Downloads/School/RBE/550/Projects/FinalProject/MotionPlanningFinalProj/RG-RRT-Rhodes.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/fstream:
 
@@ -8410,6 +8410,10 @@ CMakeFiles/manipulator.dir/manipulator.cpp.o: /Users/jessicarhodes/Downloads/Sch
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/pstl_backends/cpu_backends/fill.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/ranges_includes.h:
+
+/opt/homebrew/include/boost/fusion/iterator/advance.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__iterator/readable_traits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/all_of.h:
 
