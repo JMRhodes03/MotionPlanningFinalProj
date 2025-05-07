@@ -1,7 +1,7 @@
 ///////////////////////////////////////
 // RBE 550
 // Project 4
-// Authors: FILL ME OUT!!
+// Authors: Jessica M. Rhodes, Sunny Kang
 //////////////////////////////////////
 
 #include <iostream>
