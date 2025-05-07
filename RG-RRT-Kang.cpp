@@ -131,6 +131,7 @@ void ompl::control::RGRRT::setupReachableSet(Motion* const m)
         for (int j = 0; j < low_bound.size(); j++)
         {
             controls[j] = low_bound[j] + control_offset_[j] * (i + 1);
+            std::cout << "controls[j]: " << controls[j] << std::endl;
         }
 
         motion->steps = siC_->propagateWhileValid(m->state, motion->control, siC_->getMinControlDuration(), motion->state);

@@ -100,10 +100,6 @@ public:
             projection(i) = joint_angle->value / M_PI;
             projection(i + n) = joint_velocity->values[i] / joint_vel_limit[i];
         }
-        // const ompl::base::SO2StateSpace::StateType *rot = cstate->as<ompl::base::SO2StateSpace::StateType>(0);
-        // const ompl::base::RealVectorStateSpace::StateType *vel = cstate->as<ompl::base::RealVectorStateSpace::StateType>(1);
-        // projection(0) = rot->value;
-        // projection(1) = vel->values[0];
     }
 };
 
@@ -158,8 +154,8 @@ std::pair<std::vector<double>, std::vector<double>> computeXY_COM(const std::vec
     std::vector<double> x_c(n, 0.0);
     std::vector<double> y_c(n, 0.0);
     for (int i = 0; i < n; ++i){
-        x_c[i] = x[0] - x[i] * link_lengths[i]/2 * cos(phi[i]);
-        y_c[i] = y[0] - y[i] * link_lengths[i]/2 * sin(phi[i]);
+        x_c[i] = x[0] - x[i] + link_lengths[i]/2 * cos(phi[i]);
+        y_c[i] = y[0] - y[i] + link_lengths[i]/2 * sin(phi[i]);
     }
     return {x_c, y_c};
 }
@@ -220,7 +216,7 @@ Eigen::MatrixXd ComputeInertiaMatrix(const std::vector<double> &q)
         auto JL_i = ComputeJL_i(x, y, phi, i);
 
         // Compute the JA_i^T * I_i * JA_i term
-        double MoI_i = 1/12 * masses[i] * link_lengths[i] * link_lengths[i];
+        double MoI_i = 1.0/12.0 * masses[i] * link_lengths[i] * link_lengths[i];
         Eigen::VectorXd v = Eigen::VectorXd::Zero(n);  // Create a zero vector
         v.head(i).setOnes();  // Set the first i values to 1
 
@@ -520,22 +516,21 @@ double computeEnergy(const std::vector<double> &q, const std::vector<double> &qd
     // Eigen::VectorXd q_vec = Eigen::Map<Eigen::VectorXd>(q.data(), q.size());
     Eigen::Map<const Eigen::VectorXd> qd_vec(qd.data(), qd.size());
     auto M = ComputeInertiaMatrix(q);
-    std::cout << "Inertia Matrix: " << M << std::endl;
+    
     //compute energy
     auto phi = computePhi(q);
     auto [x, y] = computeXY(phi);
     auto [x_c, y_c] = computeXY_COM(phi, x, y);
 
-    double E = 1/2 * qd_vec.transpose() * M * qd_vec;
-
+    double E_mh = 0.0;
     for (int i = 0; i < n; i++){
-        double height_i = std::sqrt(std::pow(x_c[i], 2) + std::pow(y_c[i], 2));
-        E += 9.81 * (masses[i] * height_i);
+        double height_i = y_c[i]+0.5*n;
+        E_mh += masses[i] * height_i;
     }
+    double E = 0.5 * qd_vec.transpose() * M * qd_vec + 9.81 * E_mh;
 
     return E;
 }
-
 
 void planManipulator(ompl::control::SimpleSetupPtr &ss, int choice)
 {
@@ -666,7 +661,6 @@ int main(int /* argc */, char ** /* argv */)
         std::cout << "Plan or Benchmark? " << std::endl;
         std::cout << " (1) Plan" << std::endl;
         std::cout << " (2) Benchmark" << std::endl;
-        std::cout << " (3) Compute energy" << std::endl;
 
         std::cin >> choice;
     } while (choice < 1 || choice > 3);
@@ -722,17 +716,6 @@ int main(int /* argc */, char ** /* argv */)
     // Benchmarking
     else if (choice == 2)
         benchmarkManipulator(ss);
-    else if (choice == 3){
-        std::vector<double> q_in = {0, 0};
-        std::vector<double> qd_in = {0, 0};
-        double E_initial = computeEnergy(q_in, qd_in);
-        std::cout << "E_initial: " << E_initial << std::endl;
-    
-        std::vector<double> q_fi = {-0.904313, 0.809023};
-        std::vector<double> qd_fi = {-3.4796, -4.27405};
-        double E_final = computeEnergy(q_fi, qd_fi);
-        std::cout << "E_final: " << E_final << std::endl;
-    }
 
     else
         std::cerr << "How did you get here? Invalid choice." << std::endl;
